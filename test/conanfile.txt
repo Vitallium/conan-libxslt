@@ -1,0 +1,5 @@
+[requires]
+libxslt/1.1.29@vitallium/testing
+
+[generators]
+cmake
