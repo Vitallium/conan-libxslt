@@ -9,7 +9,6 @@ class LibxsltConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False]}
     default_options = "shared=False"
-    generators = "cmake", "txt"
     src_dir = "libxslt-%s" % version
     license = "https://git.gnome.org/browse/libxslt/tree/Copyright"
     requires = "libxml2/2.9.4@vitallium/stable"
