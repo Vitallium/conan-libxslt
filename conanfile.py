@@ -1,6 +1,6 @@
 from conans import ConanFile, ConfigureEnvironment
 import os, codecs, re
-from conans.tools import download, unzip
+from conans.tools import download, untargz, cpu_count, os_info
 
 class LibxsltConan(ConanFile):
     name = "libxslt"
@@ -9,17 +9,16 @@ class LibxsltConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False]}
     default_options = "shared=False"
-    generators = "cmake", "txt"
     src_dir = "libxslt-%s" % version
     license = "https://git.gnome.org/browse/libxslt/tree/Copyright"
     requires = "libxml2/2.9.4@vitallium/stable"
 
     def source(self):
-        zip_name = "libxslt-%s.zip" % self.version
-        url = "https://git.gnome.org/browse/libxslt/snapshot/%s" % zip_name
-        download(url, zip_name)
-        unzip(zip_name)
-        os.unlink(zip_name)
+        tar_name = "libxslt-%s.tar.gz" % self.version
+        url = "http://xmlsoft.org/sources/" + tar_name
+        download(url, tar_name)
+        untargz(tar_name)
+        os.unlink(tar_name)
 
     def configure(self):
         if self.settings.compiler == "Visual Studio":
@@ -27,17 +26,24 @@ class LibxsltConan(ConanFile):
                 self.options.shared = False
             self.configure_options = "iconv=no xslt_debug=no debugger=no"
         else:
+            self.configure_options = " \
+                --without-python \
+                --without-crypto \
+                --without-debugger \
+                --without-plugins \
+                "
+
             if self.options.shared:
-                self.configure_options = "--disable-static --enable-shared"
+                self.configure_options += " --disable-static --enable-shared"
             else:
-                self.configure_options = "--enable-static --disable-shared"
+                self.configure_options += " --enable-static --disable-shared"
 
     def build(self):
-        if self.settings.os == "Windows":
+        if self.settings.compiler == "Visual Studio":
             self.build_windows()
         else:
             self.build_with_configure()
-    
+
     def build_windows(self):
         include_paths = ";".join(self.deps_cpp_info.include_paths)
         libs_paths = ";".join(self.deps_cpp_info.lib_paths)
@@ -60,16 +66,31 @@ class LibxsltConan(ConanFile):
             ))
         self.run("cd %s\\win32 && nmake /f Makefile.msvc" % self.src_dir)
 
+    def normalize_prefix_path(self, p):
+        if os_info.is_windows:
+            return p.replace('\\', '/')
+        else:
+            return p
+
     def build_with_configure(self):
         env = ConfigureEnvironment(self.deps_cpp_info, self.settings)
-        self.run("cd %s && chmod +x ./autogen.sh && %s ./autogen.sh --prefix=%s %s" % (
+        command_env = env.command_line_env
+        xml_config = self.normalize_prefix_path(self.deps_cpp_info["libxml2"].rootpath) + "/bin/xml2-config"
+
+        if os_info.is_windows:
+            command_env += " &&"
+            command_env += ' set "XML_CONFIG=%s" &&' % xml_config
+        else:
+            command_env += ' XML_CONFIG="%s"' % xml_config
+
+        self.run("%s sh %s/configure --prefix=%s %s" % (
+            command_env,
             self.src_dir,
-            env.command_line,
-            self.package_folder,
+            self.normalize_prefix_path(self.package_folder),
             self.configure_options
             ))
-        self.run("cd %s && %s make -j5" % (self.src_dir, env.command_line))
-        self.run("cd %s &&%s make install" % (self.src_dir, env.command_line))
+        self.run("%s make -j %s" % (command_env, cpu_count()))
+        self.run("%s make install" % command_env)
 
     def package(self):
         if self.settings.os != "Windows":
