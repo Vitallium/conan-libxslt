@@ -1,6 +1,6 @@
 from conans import ConanFile, ConfigureEnvironment
 import os, codecs, re
-from conans.tools import download, unzip
+from conans.tools import download, untargz
 
 class LibxsltConan(ConanFile):
     name = "libxslt"
@@ -14,11 +14,11 @@ class LibxsltConan(ConanFile):
     requires = "libxml2/2.9.4@vitallium/stable"
 
     def source(self):
-        zip_name = "libxslt-%s.zip" % self.version
-        url = "https://git.gnome.org/browse/libxslt/snapshot/%s" % zip_name
-        download(url, zip_name)
-        unzip(zip_name)
-        os.unlink(zip_name)
+        tar_name = "libxslt-%s.tar.gz" % self.version
+        url = "http://xmlsoft.org/sources/" + tar_name
+        download(url, tar_name)
+        untargz(tar_name)
+        os.unlink(tar_name)
 
     def configure(self):
         if self.settings.compiler == "Visual Studio":
@@ -61,7 +61,7 @@ class LibxsltConan(ConanFile):
 
     def build_with_configure(self):
         env = ConfigureEnvironment(self.deps_cpp_info, self.settings)
-        self.run("cd %s && chmod +x ./autogen.sh && %s ./autogen.sh --prefix=%s %s" % (
+        self.run("cd %s && %s ./configure --prefix=%s %s" % (
             self.src_dir,
             env.command_line,
             self.package_folder,
