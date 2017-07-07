@@ -11,7 +11,7 @@ class LibxsltConan(ConanFile):
     default_options = "shared=False"
     src_dir = "libxslt-%s" % version
     license = "https://git.gnome.org/browse/libxslt/tree/Copyright"
-    requires = "libxml2/2.9.4@vitallium/stable"
+    requires = "libxml2/2.9.4@vitallium/testing"
 
     def source(self):
         tar_name = "libxslt-%s.tar.gz" % self.version

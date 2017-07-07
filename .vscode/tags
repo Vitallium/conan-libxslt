@@ -1,0 +1,53 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CMake	conan-libxslt\test\conanfile.py	/^from conans import ConanFile, CMake$/;"	kind:namespace	line:1
+ConanFile	conan-libxslt\conanfile.py	/^from conans import ConanFile, ConfigureEnvironment$/;"	kind:namespace	line:1
+ConanFile	conan-libxslt\test\conanfile.py	/^from conans import ConanFile, CMake$/;"	kind:namespace	line:1
+ConanMultiPackager	conan-libxslt\build.py	/^from conan.packager import ConanMultiPackager$/;"	kind:namespace	line:1
+ConfigureEnvironment	conan-libxslt\conanfile.py	/^from conans import ConanFile, ConfigureEnvironment$/;"	kind:namespace	line:1
+DefaultNameConan	conan-libxslt\test\conanfile.py	/^class DefaultNameConan(ConanFile):$/;"	kind:class	line:7
+LibxsltConan	conan-libxslt\conanfile.py	/^class LibxsltConan(ConanFile):$/;"	kind:class	line:5
+build	conan-libxslt\conanfile.py	/^    def build(self):$/;"	kind:member	line:41
+build	conan-libxslt\test\conanfile.py	/^    def build(self):$/;"	kind:member	line:12
+build.py	conan-libxslt\build.py	1;"	kind:file	line:1
+build_windows	conan-libxslt\conanfile.py	/^    def build_windows(self):$/;"	kind:member	line:47
+build_with_configure	conan-libxslt\conanfile.py	/^    def build_with_configure(self):$/;"	kind:member	line:75
+builder	conan-libxslt\build.py	/^    builder = ConanMultiPackager(username="vitallium", channel="testing")$/;"	kind:variable	line:4
+channel	conan-libxslt\test\conanfile.py	/^channel = os.getenv("CONAN_CHANNEL", "testing")$/;"	kind:variable	line:4
+codecs	conan-libxslt\conanfile.py	/^import os, codecs, re$/;"	kind:namespace	line:2
+conanfile.py	conan-libxslt\conanfile.py	1;"	kind:file	line:1
+conanfile.py	conan-libxslt\test\conanfile.py	1;"	kind:file	line:1
+configure	conan-libxslt\conanfile.py	/^    def configure(self):$/;"	kind:member	line:23
+cpu_count	conan-libxslt\conanfile.py	/^from conans.tools import download, untargz, cpu_count, os_info$/;"	kind:namespace	line:3
+detect_by_bom	conan-libxslt\conanfile.py	/^    def detect_by_bom(self,path,default):$/;"	kind:member	line:123
+download	conan-libxslt\conanfile.py	/^from conans.tools import download, untargz, cpu_count, os_info$/;"	kind:namespace	line:3
+generators	conan-libxslt\test\conanfile.py	/^    generators = "cmake"$/;"	kind:variable	line:9
+imports	conan-libxslt\test\conanfile.py	/^    def imports(self):$/;"	kind:member	line:17
+license	conan-libxslt\conanfile.py	/^    license = "https:\/\/git.gnome.org\/browse\/libxslt\/tree\/Copyright"$/;"	kind:variable	line:13
+load	conan-libxslt\conanfile.py	/^    def load(self, path, encoding=None):$/;"	kind:member	line:113
+name	conan-libxslt\conanfile.py	/^    name = "libxslt"$/;"	kind:variable	line:6
+normalize_prefix_path	conan-libxslt\conanfile.py	/^    def normalize_prefix_path(self, p):$/;"	kind:member	line:69
+options	conan-libxslt\conanfile.py	/^    options = {"shared": [True, False]}$/;"	kind:variable	line:10
+os	conan-libxslt\conanfile.py	/^import os, codecs, re$/;"	kind:namespace	line:2
+os	conan-libxslt\test\conanfile.py	/^import os$/;"	kind:namespace	line:2
+os_info	conan-libxslt\conanfile.py	/^from conans.tools import download, untargz, cpu_count, os_info$/;"	kind:namespace	line:3
+package	conan-libxslt\conanfile.py	/^    def package(self):$/;"	kind:member	line:95
+package_info	conan-libxslt\conanfile.py	/^    def package_info(self):$/;"	kind:member	line:109
+re	conan-libxslt\conanfile.py	/^import os, codecs, re$/;"	kind:namespace	line:2
+requires	conan-libxslt\conanfile.py	/^    requires = "libxml2\/2.9.4@vitallium\/stable"$/;"	kind:variable	line:14
+requires	conan-libxslt\test\conanfile.py	/^    requires = "libxslt\/1.1.29@%s\/%s" % (username, channel)$/;"	kind:variable	line:10
+save	conan-libxslt\conanfile.py	/^    def save(self, path, content, encoding=None):$/;"	kind:member	line:118
+settings	conan-libxslt\conanfile.py	/^    settings = "os", "compiler", "build_type", "arch"$/;"	kind:variable	line:9
+settings	conan-libxslt\test\conanfile.py	/^    settings = "os", "compiler", "build_type", "arch"$/;"	kind:variable	line:8
+source	conan-libxslt\conanfile.py	/^    def source(self):$/;"	kind:member	line:16
+src_dir	conan-libxslt\conanfile.py	/^    src_dir = "libxslt-%s" % version$/;"	kind:variable	line:12
+test	conan-libxslt\test\conanfile.py	/^    def test(self):$/;"	kind:member	line:20
+untargz	conan-libxslt\conanfile.py	/^from conans.tools import download, untargz, cpu_count, os_info$/;"	kind:namespace	line:3
+url	conan-libxslt\conanfile.py	/^    url = "http:\/\/github.com\/vitallium\/conan-libxslt"$/;"	kind:variable	line:8
+username	conan-libxslt\test\conanfile.py	/^username = os.getenv("CONAN_USERNAME", "vitallium")$/;"	kind:variable	line:5
+version	conan-libxslt\conanfile.py	/^    version = "1.1.29"$/;"	kind:variable	line:7
+visual_versions	conan-libxslt\build.py	/^    visual_versions = [14]$/;"	kind:variable	line:5
